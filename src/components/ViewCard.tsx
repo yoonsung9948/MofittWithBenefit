@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
 import Draggable from 'react-draggable';
 import { isTupleTypeNode } from 'typescript';
+import { gsap } from 'gsap';
 
 interface CardProp {
   zIndex: number;
@@ -13,25 +14,22 @@ interface CardProp {
 
 export default function ViewCard(props: CardProp) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState<Array<string>>(['', '', '', '']);
-  useEffect(() => {
-    if (cardRef.current) {
-      const top = cardRef.current.style.top;
-      const left = cardRef.current.style.left;
-      const right = cardRef.current.style.right;
-      const bottom = cardRef.current.style.bottom;
-      setPosition([top, left, right, bottom]);
-    }
-  }, [])
+  const [position, setPosition] = useState<Array<number>>([0, 0, 0, 0]);
+  const [pointerPos, setPointerPos] = useState<Array<number>>([0, 0]);
+
 
   const { zIndex } = props;
   return (
-    <Draggable axis='x'>
+    <Draggable position={{x: 0, y: 0}}>
       <Card sx={{ 
-        maxWidth: 345, 
+        width: '90vw',
+        height: '60vh',
         zIndex: zIndex,
-        position: 'absolute'
-        }}>
+        position: 'absolute',
+        borderRadius: '2.25vh',
+        boxShadow: '3',
+        }}
+        >
         <CardActionArea disableTouchRipple={true} sx={{ cursor: 'unset' }}>
           <CardMedia
             component="img"
