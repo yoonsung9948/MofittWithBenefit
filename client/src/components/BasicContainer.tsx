@@ -1,12 +1,16 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import { Container } from "@mui/material";
 
 interface ConatainerProps {
+  setLoading: Function;
   children: ReactNode;
 }
 
 export default function BasicContainer(props: ConatainerProps) {
-  const {children} = props;
+  useEffect(() => {
+    setLoading(false);
+  }, [])
+  const { setLoading, children } = props;
   return (
     <Container sx={{
       height: '100vh',

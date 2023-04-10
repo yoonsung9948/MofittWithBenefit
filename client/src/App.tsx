@@ -9,11 +9,8 @@ import Matched from './components/Matched';
 import BasicContainer from './components/BasicContainer';
 
 type PageType = 'swipe' | 'profile' | 'matched';
-type Pages = {
-  [key: string]: ReactNode;
-}
 
-const pages: Pages = {
+const pages: Record<string, JSX.Element> = {
   swipe: (
     <Box sx={{ 
       height: '80%',
@@ -34,27 +31,28 @@ const pages: Pages = {
 };
 
 function App() {
+  const [isLoading, setLoading] = useState<boolean>(true);
   const [page, setPage] = useState<PageType>('swipe');
-  useEffect(() => {
-    const loading = document.getElementById('loading');
-    if (loading) {
-      setTimeout(() => {
-        loading.style.display = 'none';
-      }, 500);
-    }
-  }, [])
 
-  // useEffect(() => {
-  // }, [page])
+  useEffect(() => {
+    if (!isLoading) {
+      const loadingPage = document.getElementById('loading');
+      if (loadingPage)
+        loadingPage.style.display = 'none';
+    }
+  }, [isLoading])
 
   return (
-    <BasicContainer>
-      {
-        pages[page]
-      }
+    // <>
+    //   {isLoading ? 
+    //     <LoadingPage /> : 
+    //   }
+    // </>
+    <BasicContainer setLoading={setLoading}>
+      {pages[page]}
       <NavBar setPage={setPage} />
     </BasicContainer>
-  );
+  )
 }
 
 export default App;

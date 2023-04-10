@@ -32,17 +32,17 @@ export default function LabelBottomNavigation(props: NavBarProps) {
       <BottomNavigationAction
         label=""
         value="swipe"
-        icon={<SwipeIcon aria-label='' sx={{transform: 'scale(2)'}} />}
+        icon={<SwipeIcon aria-label='' sx={{transform: 'scale(1.65)'}} />}
       />
       <BottomNavigationAction
         label=""
         value="profile"
-        icon={<AccountCircleIcon sx={{transform: 'scale(2)'}}/>}
+        icon={<AccountCircleIcon sx={{transform: 'scale(1.65)'}}/>}
       />
       <BottomNavigationAction
         label=""
         value="matched"
-        icon={<PeopleIcon sx={{transform: 'scale(2)'}}/>}
+        icon={<PeopleIcon sx={{transform: 'scale(1.65)'}}/>}
       />
     </BottomNavigation>
   );
