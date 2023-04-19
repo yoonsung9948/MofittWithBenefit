@@ -27,9 +27,10 @@
     <title>MoffittMatch</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="loading" style="position: fixed; top: 0; left: 0; height: 100vh; width: 100vw; background-color: blue; z-index: 100;">
-      <h1>Loading...</h1>
+    <div id="loading" style="display: flex; justify-content: center; align-items: center; position: fixed; top: 0; left: 0; height: 100%; width: 100%; background-color: #0E3386; z-index: 100;">
+      <div id="loadingBarContainer" style="height: 0.5%; width: 80%; background-color: darkgrey; border-radius: 15vw;">
+        <div id="loadingBar" style="background-color: #FFFF66; width: 0%; height: 100%; border-radius: 15vw;"></div>
+      </div>
     </div>
     <div id="root"></div>
     <!--
@@ -42,5 +43,24 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        function move() {
+          const elem = document.getElementById("loadingBar");   
+          let width = 0;
+          const id = setInterval(frame, 5);
+          function frame() {
+            if (width >= 100) {
+              clearInterval(id);
+              document.getElementById('loading').style.display = 'none';
+            } else {
+              width++; 
+              elem.style.width = width + '%'; 
+            }
+          }
+        }
+        move(); // call the move function after the document is fully loaded
+      });
+    </script>
   </body>
 </html>
